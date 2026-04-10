@@ -93,32 +93,6 @@ h1 span {
   line-height: 1.8;
 }
 
-.status-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 0.5rem 0.85rem;
-  background: rgba(214, 123, 77, 0.16);
-  color: var(--accent);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.status-copy {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
 .footer {
   display: flex;
   justify-content: space-between;
