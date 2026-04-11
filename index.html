@@ -6,35 +6,205 @@
     <title>SophieBuildsAtHarvard</title>
     <meta
       name="description"
-      content="A quiet coming-soon landing page for SophieBuildsAtHarvard."
+      content="Coming soon page for SophieBuildsAtHarvard."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap');
+
+      .sp-root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem 4rem;
+        background: #6B0020;
+        color: #F0EDE6;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .sp-grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      .sp-handle {
+        font-family: 'DM Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        color: rgba(240, 237, 230, 0.35);
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.1s ease forwards;
+      }
+
+      .sp-headline {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(64px, 14vw, 120px);
+        font-weight: 400;
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+        color: #F0EDE6;
+        margin: 0 0 0.15em;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.25s ease forwards;
+      }
+
+      .sp-subhead {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(44px, 10vw, 84px);
+        font-weight: 400;
+        font-style: italic;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: rgba(240, 237, 230, 0.45);
+        margin: 0;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.45s ease forwards;
+      }
+
+      .sp-qmark {
+        display: inline-block;
+        animation: wobble 2.4s ease-in-out infinite;
+        transform-origin: bottom center;
+      }
+
+      @keyframes wobble {
+        0%,
+        100% {
+          transform: rotate(-6deg);
+        }
+
+        50% {
+          transform: rotate(6deg);
+        }
+      }
+
+      .sp-cta {
+        margin-top: 4rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.65s ease forwards;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .sp-btn {
+        background: transparent;
+        color: #F0EDE6;
+        border: 1px solid rgba(240, 237, 230, 0.25);
+        padding: 13px 32px;
+        font-family: 'DM Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s, font-size 0.2s;
+      }
+
+      .sp-btn:hover {
+        border-color: rgba(240, 237, 230, 0.7);
+        background: rgba(240, 237, 230, 0.06);
+      }
+
+      .sp-btn:active {
+        opacity: 0.7;
+      }
+
+      .sp-btn.done {
+        border-color: rgba(240, 237, 230, 0.2);
+        font-size: 20px;
+        cursor: default;
+        letter-spacing: 0;
+      }
+
+      .sp-reply {
+        font-family: 'DM Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: rgba(240, 237, 230, 0.4);
+        max-width: 340px;
+        line-height: 1.7;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.5s ease, opacity 0.4s ease;
+      }
+
+      .sp-reply.visible {
+        max-height: 80px;
+        opacity: 1;
+      }
+
+      .sp-confetti-wrap {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
   <body>
-    <main class="page-shell">
-      <section class="coming-soon reveal" id="interactive-card">
-        <div class="card-glow" aria-hidden="true"></div>
-        <div class="card-content">
-          <p class="eyebrow">SophieBuildsAtHarvard</p>
-          <h1>
-            Coming
-            <span>soon.</span>
-          </h1>
-        </div>
-      </section>
+    <div class="sp-root">
+      <div class="sp-grain"></div>
+      <div class="sp-confetti-wrap" id="confetti"></div>
 
-      <footer class="footer reveal">
-        <p>Thank you for visiting.</p>
-        <p>© <span id="year"></span> SophieBuildsAtHarvard</p>
-      </footer>
-    </main>
+      <div class="sp-handle">@SophieBuildsAtHarvard</div>
+      <div class="sp-headline">Coming Soon</div>
+      <div class="sp-subhead"><span class="sp-qmark">?</span></div>
 
-    <script src="./script.js"></script>
+      <div class="sp-cta">
+        <button class="sp-btn" onclick="handleClick(this)">Cross Your Fingers →</button>
+        <div class="sp-reply" id="reply"></div>
+      </div>
+    </div>
+
+    <script>
+      const colors = ['#ffffff', '#cccccc', '#888888', '#555555'];
+      const shapes = ['■', '●', '▲', '◆', '×', '+'];
+
+      function handleClick(btn) {
+        btn.textContent = '🤞';
+        btn.classList.add('done');
+        const reply = document.getElementById('reply');
+        reply.textContent = 'fingers crossed. sophie thanks you.';
+        reply.classList.add('visible');
+        fireConfetti();
+      }
+
+      function fireConfetti() {
+        const container = document.getElementById('confetti');
+        container.innerHTML = '';
+        const style = document.createElement('style');
+        style.textContent =
+          '@keyframes fall { 0%{opacity:1;transform:translateY(0) rotate(0deg)} 100%{opacity:0;transform:translateY(100vh) rotate(540deg)} }';
+        container.appendChild(style);
+
+        for (let i = 0; i < 55; i += 1) {
+          const el = document.createElement('div');
+          el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+          el.style.cssText =
+            `position:absolute;left:${Math.random() * 100}%;top:-20px;font-size:${7 + Math.random() * 7}px;color:${colors[Math.floor(Math.random() * colors.length)]};opacity:0;animation:fall ${0.9 + Math.random() * 1.1}s ${Math.random() * 0.5}s ease-in forwards;`;
+          container.appendChild(el);
+        }
+      }
+    </script>
   </body>
 </html>
